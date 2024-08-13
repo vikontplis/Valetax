@@ -1,8 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestAssignment", "TestAssignment", "{1049DEE9-0446-429B-9A33-D0412928FA16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Velatex.Domain", "Velatex.Domain\Velatex.Domain.csproj", "{AC1F58D1-D796-4AC8-937D-D49AA8A46B45}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC1F58D1-D796-4AC8-937D-D49AA8A46B45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC1F58D1-D796-4AC8-937D-D49AA8A46B45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC1F58D1-D796-4AC8-937D-D49AA8A46B45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC1F58D1-D796-4AC8-937D-D49AA8A46B45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
