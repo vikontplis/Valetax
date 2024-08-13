@@ -62,6 +62,7 @@
     
   
 - Upload your code to GitHub 
+    https://github.com/vikontplis/Valetax
 - and send us the link.
 
 * In case of any questions, please reach us out via telegram: https://t.me/v_fx_2018
