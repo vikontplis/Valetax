@@ -4,6 +4,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestAssignment", "TestAssig
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Velatex.Domain", "Velatex.Domain\Velatex.Domain.csproj", "{AC1F58D1-D796-4AC8-937D-D49AA8A46B45}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Valetax.WebAPI", "Valetax.WebAPI\Valetax.WebAPI.csproj", "{FF8C8638-E437-4EB3-90CB-24D35940E565}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,5 +16,9 @@ Global
 		{AC1F58D1-D796-4AC8-937D-D49AA8A46B45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC1F58D1-D796-4AC8-937D-D49AA8A46B45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC1F58D1-D796-4AC8-937D-D49AA8A46B45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF8C8638-E437-4EB3-90CB-24D35940E565}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF8C8638-E437-4EB3-90CB-24D35940E565}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF8C8638-E437-4EB3-90CB-24D35940E565}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF8C8638-E437-4EB3-90CB-24D35940E565}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
