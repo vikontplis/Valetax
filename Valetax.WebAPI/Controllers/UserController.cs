@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Valetax.WebAPI.Controllers;
 
@@ -11,9 +12,9 @@ public class UserController : ControllerBase
     /// remember Me
     /// </summary>
     [HttpPost]
-    [Route("api.[controller].partner.[action]")]
-    public ActionResult<bool> RememberMe(string code)
+    [Route("api.user.partner.rememberMe")]
+    public void RememberMe([Required] string code)
     {
-        return Ok();
+      
     }
 }
