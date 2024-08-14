@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Valetax.WebAPI", "Valetax.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Valetax.Infrastructure", "Valetax.Infrastructure\Valetax.Infrastructure.csproj", "{E311BF35-ED18-4B9A-815B-0B683098D0DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Valetax.Test", "Valetax.Test\Valetax.Test.csproj", "{8CA6FA65-1BCE-479E-B533-90F8491743E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{E311BF35-ED18-4B9A-815B-0B683098D0DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E311BF35-ED18-4B9A-815B-0B683098D0DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E311BF35-ED18-4B9A-815B-0B683098D0DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CA6FA65-1BCE-479E-B533-90F8491743E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CA6FA65-1BCE-479E-B533-90F8491743E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CA6FA65-1BCE-479E-B533-90F8491743E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CA6FA65-1BCE-479E-B533-90F8491743E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
