@@ -1,6 +1,8 @@
 
 using System.Reflection;
 using Microsoft.OpenApi.Models;
+using Valetax.Infrastructure.Contracts;
+using Valetax.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +31,8 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 */
+
+builder.Services.AddScoped<IUSerRememberMe, USerRememberMe>();
 
 var app = builder.Build();
 
