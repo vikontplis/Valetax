@@ -14,4 +14,5 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<VNode> Nodes { get; set; }
+    public DbSet<VJournal> Journals { get; set; }
 }

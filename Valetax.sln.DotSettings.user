@@ -4,7 +4,7 @@
 &lt;/AssemblyExplorer&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9e13278b_002Df351_002D4a4b_002D800c_002D730c06b6af58/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="IsConnectionStringPresentTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::8CA6FA65-1BCE-479E-B533-90F8491743E0::net6.0::Valetax.Test.InfraUnitTest.IsConnectionStringPresentTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::8CA6FA65-1BCE-479E-B533-90F8491743E0::net6.0::Valetax.Test.InfraUnitTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	
