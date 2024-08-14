@@ -32,7 +32,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 */
 
-builder.Services.AddScoped<IUSerRememberMe, USerRememberMe>();
+builder.Services.AddScoped<IUSerRememberMe, UserRememberMe>();
 
 var app = builder.Build();
 

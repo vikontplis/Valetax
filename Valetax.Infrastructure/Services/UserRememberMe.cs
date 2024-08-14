@@ -2,7 +2,7 @@
 
 namespace Valetax.Infrastructure.Services;
 
-public class USerRememberMe : IUSerRememberMe
+public class UserRememberMe : IUSerRememberMe
 {
     public bool RememberMe(string code)
     {
