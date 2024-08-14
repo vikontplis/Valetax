@@ -14,4 +14,9 @@
       <Folder Include="Controllers\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Valetax.Infrastructure\Valetax.Infrastructure.csproj" />
+      <ProjectReference Include="..\Velatex.Domain\Velatex.Domain.csproj" />
+    </ItemGroup>
+
 </Project>
