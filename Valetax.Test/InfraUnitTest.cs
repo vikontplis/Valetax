@@ -1,3 +1,5 @@
+using Valetax.Infrastructure.Context;
+
 namespace Valetax.Test;
 
 public class InfraUnitTest
@@ -5,5 +7,8 @@ public class InfraUnitTest
     [Fact]
     public void IsConnectionStringPresentTest()
     {
+        var connectionString = Utility.GetConnectionString();
+        
+        Assert.NotNull(connectionString);
     }
 }
