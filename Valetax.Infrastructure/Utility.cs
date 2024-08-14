@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Valetax.Infrastructure.Context;
+namespace Valetax.Infrastructure;
 
 public static class Utility
 {

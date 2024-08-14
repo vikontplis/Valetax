@@ -1,4 +1,4 @@
-using Valetax.Infrastructure.Context;
+using Valetax.Infrastructure;
 
 namespace Valetax.Test;
 

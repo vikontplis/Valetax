@@ -1,5 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using Valetax.Infrastructure.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
