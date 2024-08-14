@@ -12,8 +12,8 @@ using Valetax.Infrastructure.Context;
 namespace Valetax.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240814161517_AddJournal")]
-    partial class AddJournal
+    [Migration("20240814175951_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,7 +36,10 @@ namespace Valetax.Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<long>("EventId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("EventId"));
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -74,8 +77,7 @@ namespace Valetax.Infrastructure.Migrations
                     b.HasOne("Velatex.Domain.Models.VNode", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Parent");
                 });
