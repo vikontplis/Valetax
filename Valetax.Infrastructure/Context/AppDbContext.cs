@@ -34,8 +34,9 @@ public class AppDbContext : DbContext
                 .HasForeignKey(p => p.ParentId)
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.Restrict);
-           // entity.HasData(new VNode() { Id = 1, Name = "Root" });
+            // entity.HasData(new VNode() { Id = 1, Name = "Root" });
         });
+        
     }
 
     public DbSet<VNode> Nodes { get; set; }

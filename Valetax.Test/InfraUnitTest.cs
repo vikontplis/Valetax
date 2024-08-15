@@ -20,4 +20,24 @@ public class InfraUnitTest
         
         Assert.True(result);
     }
+    
+    [Fact]
+    public async void CreateTreeTest()
+    {
+        var service = new TreeService();
+        
+        var result = await service.CreateTree("Root3");
+        
+        Assert.NotNull(result);
+    }
+    
+    [Fact]
+    public async void GetTreeTest()
+    {
+        var service = new TreeService();
+        
+        var result = await service.GetTree("Root1");
+        
+        Assert.NotNull(result);
+    }
 }

@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using Valetax.Infrastructure.Contracts;
+using Velatex.Domain.Models;
 
 namespace Valetax.WebAPI.Controllers;
 
@@ -11,9 +14,11 @@ namespace Valetax.WebAPI.Controllers;
 [Produces("application/json")]
 public class TreeController : ControllerBase
 {
-    public TreeController()
+    private readonly ITreeService _treeService;
+
+    public TreeController(ITreeService treeService)
     {
-        
+        _treeService = treeService;
     }
 
     /// <summary>
@@ -22,9 +27,10 @@ public class TreeController : ControllerBase
     /// </summary>
     [HttpPost]
     [Route("api.user.tree.get")]
-    public ActionResult<bool> Get()
+    public async Task<ActionResult<VNode>> Get([Required] string treeName)
     {
-        return Ok(true);
+        var tree = await _treeService.GetTree(treeName);
+        return Ok(tree);
     }
 
 }

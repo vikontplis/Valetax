@@ -1,8 +1,9 @@
-
 using System.Reflection;
 using Microsoft.OpenApi.Models;
 using Valetax.Infrastructure.Contracts;
 using Valetax.Infrastructure.Services;
+
+#region BUILDER
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+#endregion
+
+#region SWAGGER
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
@@ -21,20 +26,24 @@ builder.Services.AddSwaggerGen(options =>
         Title = "Valetax API",
         Description = "An ASP.NET Core Web API for managing Tree items"
     });
-    
+
     options.EnableAnnotations();
 
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
+#endregion
 
-/*
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-*/
+
+#region SERVICES
 
 builder.Services.AddScoped<IUSerRememberMe, UserRememberMe>();
+builder.Services.AddScoped<ITreeService, TreeService>();
+
+#endregion
+
+#region APP
 
 var app = builder.Build();
 
@@ -54,3 +63,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+#endregion
