@@ -6,4 +6,7 @@ public class VJournal
     public long EventId { get; set; }
     public string Text { get; set; }
     public DateTime CreatedAt { get; set; }
+    public string? Query { get; set; }
+    public string? Body { get; set; }
+    public string? Trace { get; set; }
 }
