@@ -10,7 +10,7 @@ namespace Valetax.Infrastructure.Services;
 
 public class TreeService : ITreeService
 {
-    private async Task<bool> IsTreeExists(string treeName)
+    public async Task<bool> IsTreeExists(string treeName)
     {
         await using var db = new AppDbContext();
         var isExists = await db.Nodes

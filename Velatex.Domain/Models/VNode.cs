@@ -10,6 +10,9 @@ public class VNode
     public long? ParentId { get; set; }
     [JsonIgnore] 
     public virtual VNode Parent { get; set; }
+    
+    [JsonIgnore] 
+    public long TreeId { get; set; }
     public virtual IEnumerable<VNode> Children { get; set; }
 
     public override string ToString()
