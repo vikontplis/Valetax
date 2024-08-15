@@ -19,8 +19,7 @@ builder.Services.AddSwaggerGen(options =>
     {
         Version = "v1",
         Title = "Valetax API",
-        Description = "An ASP.NET Core Web API for managing Tree items",
-        
+        Description = "An ASP.NET Core Web API for managing Tree items"
     });
 
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

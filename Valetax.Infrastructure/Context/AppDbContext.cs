@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Velatex.Domain.Models;
 
 namespace Valetax.Infrastructure.Context;
@@ -20,7 +19,7 @@ public class AppDbContext : DbContext
         {
             entity.HasKey(p => p.Id);
             entity.Property(p => p.Text)
-                .IsRequired(true);
+                .IsRequired();
             entity.Property(p => p.EventId)
                 .ValueGeneratedOnAdd();
         });
@@ -29,7 +28,7 @@ public class AppDbContext : DbContext
         {
             entity.HasKey(p => p.Id);
             entity.Property(p => p.Name)
-                .IsRequired(true);
+                .IsRequired();
             entity.HasOne(p => p.Parent)
                 .WithMany(p => p.Children)
                 .HasForeignKey(p => p.ParentId)
