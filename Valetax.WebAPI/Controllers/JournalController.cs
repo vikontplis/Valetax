@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using Valetax.Infrastructure.DTO;
+using Valetax.Infrastructure.Filters;
 
 namespace Valetax.WebAPI.Controllers;
 
@@ -13,7 +16,6 @@ public class JournalController : ControllerBase
 {
     public JournalController()
     {
-        
     }
 
     /// <summary>
@@ -24,19 +26,21 @@ public class JournalController : ControllerBase
     /// </summary>
     [HttpPost]
     [Route("api.user.journal.getRange")]
-    public ActionResult<bool> GetRange()
+    public async Task<ActionResult<JournalRange>> GetRange(
+        [Required] [FromQuery] long skip, 
+        [Required] [FromQuery] long take, 
+        [Required] [FromBody] JournalFilter journalFilter)
     {
-        return Ok(true);
+        return Ok(null);
     }
-    
+
     /// <summary>
     /// Returns the information about an particular event by ID.
     /// </summary>
     [HttpPost]
     [Route("api.user.journal.getSingle")]
-    public ActionResult<bool> GetSingle()
+    public async Task<ActionResult<JournalInfo>> GetSingle([Required] long id)
     {
-        return Ok(true);
+        return Ok(null);
     }
-
 }
