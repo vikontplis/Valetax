@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using Valetax.Infrastructure.Contracts;
 using Valetax.Infrastructure.DTO;
 using Valetax.Infrastructure.Filters;
 
@@ -14,8 +15,11 @@ namespace Valetax.WebAPI.Controllers;
 [Produces("application/json")]
 public class JournalController : ControllerBase
 {
-    public JournalController()
+    private readonly IJournalService _journalService;
+
+    public JournalController(IJournalService journalService)
     {
+        _journalService = journalService;
     }
 
     /// <summary>
@@ -27,11 +31,12 @@ public class JournalController : ControllerBase
     [HttpPost]
     [Route("api.user.journal.getRange")]
     public async Task<ActionResult<JournalRange>> GetRange(
-        [Required] [FromQuery] long skip, 
-        [Required] [FromQuery] long take, 
+        [Required] [FromQuery] int skip,
+        [Required] [FromQuery] int take,
         [Required] [FromBody] JournalFilter journalFilter)
     {
-        return Ok(null);
+        var jrange = await _journalService.GetRange(skip, take, journalFilter);
+        return Ok(jrange);
     }
 
     /// <summary>
@@ -41,6 +46,7 @@ public class JournalController : ControllerBase
     [Route("api.user.journal.getSingle")]
     public async Task<ActionResult<JournalInfo>> GetSingle([Required] long id)
     {
-        return Ok(null);
+        var ji = await _journalService.GetSingle(id);
+        return Ok(ji);
     }
 }

@@ -41,6 +41,7 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddScoped<IUSerRememberMe, UserRememberMe>();
 builder.Services.AddScoped<ITreeService, TreeService>();
 builder.Services.AddScoped<ITreeNodeService, TreeNodeService>();
+builder.Services.AddScoped<IJournalService, JournalService>();
 
 #endregion
 
