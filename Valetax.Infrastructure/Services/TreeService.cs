@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-using System.Text.Json.Serialization;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Valetax.Infrastructure.Context;
 using Valetax.Infrastructure.Contracts;
 using Velatex.Domain.Exceptions;

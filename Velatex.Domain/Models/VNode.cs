@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text;
 using System.Text.Json.Serialization;
 
 namespace Velatex.Domain.Models;
@@ -6,13 +7,11 @@ namespace Velatex.Domain.Models;
 public class VNode
 {
     public long Id { get; set; }
-    public string Name { get; set; }
+    [Required] public string Name { get; set; }
     public long? ParentId { get; set; }
-    [JsonIgnore] 
-    public virtual VNode Parent { get; set; }
-    
-    [JsonIgnore] 
-    public long TreeId { get; set; }
+    [JsonIgnore] public virtual VNode Parent { get; set; }
+
+    [JsonIgnore] public long TreeId { get; set; }
     public virtual IEnumerable<VNode> Children { get; set; }
 
     public override string ToString()

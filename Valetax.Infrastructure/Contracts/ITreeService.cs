@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Velatex.Domain.Models;
+﻿using Velatex.Domain.Models;
 
 namespace Valetax.Infrastructure.Contracts;
 

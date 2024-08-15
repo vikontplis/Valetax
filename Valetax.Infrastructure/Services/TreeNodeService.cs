@@ -59,7 +59,7 @@ public class TreeNodeService : ITreeNodeService
             throw new TreeNameNullOrEmptyException();
 
         if (nodeId is null)
-            throw new NodeIdMissingException($"Node id is null.");
+            throw new NodeIdMissingException("Node id is null.");
 
         await using var db = new AppDbContext();
 
@@ -92,10 +92,10 @@ public class TreeNodeService : ITreeNodeService
             throw new TreeNameNullOrEmptyException();
 
         if (nodeId is null)
-            throw new NodeIdMissingException($"Node id is null.");
+            throw new NodeIdMissingException("Node id is null.");
 
         if (string.IsNullOrEmpty(newNodeName))
-            throw new NodeNewNameMissingException($"New node name missing.");
+            throw new NodeNewNameMissingException("New node name missing.");
 
         await using var db = new AppDbContext();
 
@@ -114,7 +114,7 @@ public class TreeNodeService : ITreeNodeService
             throw new NodeNotExistsException($"Node with id: {nodeId} not in tree {treeName}");
 
         if (node.ParentId is null)
-            throw new RootNodeRenameException($"Can't rename the root node.");
+            throw new RootNodeRenameException("Can't rename the root node.");
 
         // find sibling nodes - check for unique names
         var parentNode = await db.Nodes
