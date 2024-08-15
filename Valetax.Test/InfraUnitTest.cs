@@ -36,7 +36,7 @@ public class InfraUnitTest
     {
         var service = new TreeService();
 
-        var result = await service.GetTree("Root1");
+        var result = await service.GetTree("Root-TEST");
 
         Assert.NotNull(result);
     }
@@ -44,24 +44,24 @@ public class InfraUnitTest
     [Fact]
     public async void CreateNodeTest()
     {
-        var service = new TreeNodeService(new TreeService());
+        var service = new TreeNodeService();
 
-        await service.CreateNode("Root1", 3, "N3");
+        await service.CreateNode("Root1", 9, "XXX");
     }
 
     [Fact]
     public async void DeleteNodeTest()
     {
-        var service = new TreeNodeService(new TreeService());
+        var service = new TreeNodeService();
 
-        await service.DeleteNode("Root1", 14);
+        await service.DeleteNode("Root1", 18);
     }
 
     [Fact]
     public async void RenameNodeTest()
     {
-        var service = new TreeNodeService(new TreeService());
+        var service = new TreeNodeService();
 
-        await service.RenameNode("Root1", 6, "N1");
+        await service.RenameNode("Root1", 18, "N-XYX");
     }
 }

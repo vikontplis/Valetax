@@ -74,6 +74,9 @@ public class TreeService : ITreeService
         db.Nodes.Add(node);
         await db.SaveChangesAsync();
 
+        node.TreeId = node.Id;
+        await db.SaveChangesAsync();
+        
         return node;
     }
 }

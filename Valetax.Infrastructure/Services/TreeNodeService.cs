@@ -8,11 +8,8 @@ namespace Valetax.Infrastructure.Services;
 
 public class TreeNodeService : ITreeNodeService
 {
-    private readonly ITreeService _treeService;
-
-    public TreeNodeService(ITreeService treeService)
+    public TreeNodeService()
     {
-        _treeService = treeService;
     }
 
     public async Task CreateNode(string? treeName, long? parentNodeId, string nodeName)
@@ -26,10 +23,14 @@ public class TreeNodeService : ITreeNodeService
         if (string.IsNullOrEmpty(nodeName))
             throw new NodeNameNullOrEmptyException();
 
-        if (!await _treeService.IsTreeExists(treeName))
-            throw new TreeNotExistsException($"Tree with name: {treeName} not exists");
-
         await using var db = new AppDbContext();
+
+        // find Tree 
+        var tree = await db.Nodes
+            .SingleOrDefaultAsync(n => n.Name == treeName && n.ParentId == null);
+
+        if (tree is null)
+            throw new TreeNotExistsException($"Tree with name: {treeName} not exists");
 
         // find Node with parentNodeId in Tree
         var parentNode = await db.Nodes
@@ -47,7 +48,7 @@ public class TreeNodeService : ITreeNodeService
         }
 
         // create node in DB
-        var node = new VNode() { Name = nodeName, ParentId = parentNodeId };
+        var node = new VNode() { Name = nodeName, ParentId = parentNodeId, TreeId = tree.Id };
         db.Nodes.Add(node);
         await db.SaveChangesAsync();
     }
