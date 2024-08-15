@@ -56,4 +56,12 @@ public class InfraUnitTest
 
         await service.DeleteNode("Root1", 14);
     }
+
+    [Fact]
+    public async void RenameNodeTest()
+    {
+        var service = new TreeNodeService(new TreeService());
+
+        await service.RenameNode("Root1", 6, "N1");
+    }
 }

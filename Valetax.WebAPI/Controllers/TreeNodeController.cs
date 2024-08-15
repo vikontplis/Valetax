@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using Valetax.Infrastructure.Contracts;
 
 namespace Valetax.WebAPI.Controllers;
 
@@ -11,9 +13,11 @@ namespace Valetax.WebAPI.Controllers;
 [Produces("application/json")]
 public class TreeNodeController : ControllerBase
 {
-    public TreeNodeController()
+    private readonly ITreeNodeService _treeNodeService;
+
+    public TreeNodeController(ITreeNodeService treeNodeService)
     {
-        
+        _treeNodeService = treeNodeService;
     }
 
     /// <summary>
@@ -23,22 +27,29 @@ public class TreeNodeController : ControllerBase
     /// </summary>
     [HttpPost]
     [Route("api.user.tree.node.create")]
-    public ActionResult<bool> Create()
+    public async Task<ActionResult> Create(
+        [Required] string? treeName,
+        [Required] long? parentNodeId,
+        [Required] string nodeName)
     {
-        return Ok(true);
+        await _treeNodeService.CreateNode(treeName, parentNodeId, nodeName);
+        return Ok();
     }
-    
+
     /// <summary>
     /// Delete an existing node in your tree.
     /// You must specify a node ID that belongs your tree.
     /// </summary>
     [HttpPost]
     [Route("api.user.tree.node.delete")]
-    public ActionResult<bool> Delete()
+    public async Task<ActionResult> Delete(
+        [Required] string? treeName,
+        [Required] long? nodeId)
     {
-        return Ok(true);
+        await _treeNodeService.DeleteNode(treeName, nodeId);
+        return Ok();
     }
-    
+
     /// <summary>
     /// Rename an existing node in your tree.
     /// You must specify a node ID that belongs your tree.
@@ -46,9 +57,12 @@ public class TreeNodeController : ControllerBase
     /// </summary>
     [HttpPost]
     [Route("api.user.tree.node.rename")]
-    public ActionResult<bool> Rename()
+    public async Task<ActionResult> Rename(
+        [Required] string? treeName,
+        [Required] long? nodeId,
+        [Required] string? newNodeName)
     {
-        return Ok(true);
+        await _treeNodeService.RenameNode(treeName, nodeId, newNodeName);
+        return Ok();
     }
-
 }

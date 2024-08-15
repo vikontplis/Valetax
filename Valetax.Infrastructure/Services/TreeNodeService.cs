@@ -6,7 +6,7 @@ using Velatex.Domain.Models;
 
 namespace Valetax.Infrastructure.Services;
 
-public class TreeNodeService
+public class TreeNodeService : ITreeNodeService
 {
     private readonly ITreeService _treeService;
 
@@ -27,7 +27,7 @@ public class TreeNodeService
             throw new NodeNameNullOrEmptyException();
 
         if (!await _treeService.IsTreeExists(treeName))
-           throw new TreeNotExistsException($"Tree with name: {treeName} not exists");
+            throw new TreeNotExistsException($"Tree with name: {treeName} not exists");
 
         await using var db = new AppDbContext();
 
@@ -59,28 +59,75 @@ public class TreeNodeService
 
         if (nodeId is null)
             throw new NodeIdMissingException($"Node id is null.");
-        
+
         await using var db = new AppDbContext();
-        
+
         // find Tree 
-        var tree =  await db.Nodes
+        var tree = await db.Nodes
             .SingleOrDefaultAsync(n => n.Name == treeName && n.ParentId == null);
 
         if (tree is null)
             throw new TreeNotExistsException($"Tree with name: {treeName} not exists");
-        
+
         // find Node with Id in Tree
         var node = await db.Nodes
             .Include(n => n.Children)
             .SingleOrDefaultAsync(n => n.Id == nodeId && n.TreeId == tree.Id);
-        
+
         if (node is null)
             throw new NodeNotExistsException($"Node with id: {nodeId} not in tree {treeName}");
 
         if (node.Children.Any())
-            throw new NodeNotEmptyException($"Node {node.Name} not empty. Delete all children nodes before delete action.");
+            throw new NodeNotEmptyException(
+                $"Node {node.Name} not empty. Delete all children nodes before delete action.");
 
         db.Nodes.Remove(node);
+        await db.SaveChangesAsync();
+    }
+
+    public async Task RenameNode(string? treeName, long? nodeId, string? newNodeName)
+    {
+        if (string.IsNullOrEmpty(treeName))
+            throw new TreeNameNullOrEmptyException();
+
+        if (nodeId is null)
+            throw new NodeIdMissingException($"Node id is null.");
+
+        if (string.IsNullOrEmpty(newNodeName))
+            throw new NodeNewNameMissingException($"New node name missing.");
+
+        await using var db = new AppDbContext();
+
+        // find Tree 
+        var tree = await db.Nodes
+            .SingleOrDefaultAsync(n => n.Name == treeName && n.ParentId == null);
+
+        if (tree is null)
+            throw new TreeNotExistsException($"Tree with name: {treeName} not exists");
+
+        // find Node with Id in Tree
+        var node = await db.Nodes
+            .SingleOrDefaultAsync(n => n.Id == nodeId && n.TreeId == tree.Id);
+
+        if (node is null)
+            throw new NodeNotExistsException($"Node with id: {nodeId} not in tree {treeName}");
+
+        if (node.ParentId is null)
+            throw new RootNodeRenameException($"Can't rename the root node.");
+
+        // find sibling nodes - check for unique names
+        var parentNode = await db.Nodes
+            .Include(n => n.Children)
+            .SingleOrDefaultAsync(n => n.Id == node.ParentId);
+
+        // check if sibling nodes has different Names
+        if (parentNode!.Children.Any(child => child.Name == newNodeName))
+        {
+            throw new NodeNameAlreadyExistsException(
+                $"Node with Name: {newNodeName} already exists in parent node with id: {parentNode.Id}");
+        }
+
+        node.Name = newNodeName;
         await db.SaveChangesAsync();
     }
 }
