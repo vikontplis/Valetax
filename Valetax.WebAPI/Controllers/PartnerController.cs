@@ -1,21 +1,25 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using Valetax.Infrastructure.Contracts;
 
 namespace Valetax.WebAPI.Controllers;
 
+/// <summary>
+/// Represents partner API
+/// </summary>
 [ApiController]
-//[Route("api.[controller]")]
+[SwaggerTag("Represents partner API")]
 [Produces("application/json")]
-public class UserController : ControllerBase
+public class PartnerController : ControllerBase
 {
     private readonly IUSerRememberMe _rememberMeService;
 
-    public UserController(IUSerRememberMe rememberMeService)
+    public PartnerController(IUSerRememberMe rememberMeService)
     {
         _rememberMeService = rememberMeService;
     }
-    
+
     /// <summary>
     /// remember Me
     /// </summary>
