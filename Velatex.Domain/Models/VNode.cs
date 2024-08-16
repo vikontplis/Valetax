@@ -12,7 +12,7 @@ public class VNode
     [JsonIgnore] public virtual VNode Parent { get; set; }
 
     [JsonIgnore] public long TreeId { get; set; }
-    public virtual IEnumerable<VNode> Children { get; set; }
+    public virtual IEnumerable<VNode> Children { get; set; } = new List<VNode>();
 
     public override string ToString()
     {
