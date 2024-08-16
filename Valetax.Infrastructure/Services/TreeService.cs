@@ -25,22 +25,21 @@ public class TreeService : ITreeService
         if (!await IsTreeExists(treeName)) await CreateTree(treeName);
 
         await using var db = new AppDbContext();
-        var node = await db.Nodes
+
+        var rootNode = await db.Nodes
             .SingleAsync(n => n.Name == treeName && n.ParentId == null);
 
-        RecursiveLoad(node);
-        
-        /* show json result
-        JsonSerializerOptions options = new()
-        {
-            ReferenceHandler = ReferenceHandler.IgnoreCycles,
-            WriteIndented = true
-        };
-        
-        var js = JsonSerializer.Serialize(node, options);
-        */
+        var allNodesInTree = await db.Nodes
+            .Where(n => n.TreeId == rootNode.Id)
+            .ToListAsync();
 
-        return node;
+        var root = allNodesInTree.Single(n => n.ParentId is null);
+        return root;
+
+    /*
+        // unoptimized version
+        RecursiveLoad(rootNode);
+        return rootNode;
 
         void RecursiveLoad(VNode parent)
         {
@@ -54,6 +53,18 @@ public class TreeService : ITreeService
                 RecursiveLoad(child);
             }
         }
+    */
+
+    /*
+         //show json result
+        JsonSerializerOptions options = new()
+        {
+            ReferenceHandler = ReferenceHandler.IgnoreCycles,
+            WriteIndented = true
+        };
+
+        var js = JsonSerializer.Serialize(node, options);
+    */
     }
 
 
@@ -74,7 +85,7 @@ public class TreeService : ITreeService
 
         node.TreeId = node.Id;
         await db.SaveChangesAsync();
-        
+
         return node;
     }
 }
