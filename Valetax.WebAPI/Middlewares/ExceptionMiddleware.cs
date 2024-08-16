@@ -3,7 +3,6 @@ using System.Net.Mime;
 using System.Text;
 using System.Text.Json;
 using Valetax.Infrastructure.Contracts;
-using Valetax.Infrastructure.DTO;
 using Velatex.Domain.Exceptions;
 
 namespace Valetax.WebAPI.Middlewares;
