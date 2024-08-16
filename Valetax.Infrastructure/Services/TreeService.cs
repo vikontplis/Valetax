@@ -26,7 +26,7 @@ public class TreeService : ITreeService
 
         await using var db = new AppDbContext();
         var node = await db.Nodes
-            .SingleAsync(n => n.Name == treeName);
+            .SingleAsync(n => n.Name == treeName && n.ParentId == null);
 
         RecursiveLoad(node);
         
