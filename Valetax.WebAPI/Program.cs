@@ -2,6 +2,7 @@ using System.Reflection;
 using Microsoft.OpenApi.Models;
 using Valetax.Infrastructure.Contracts;
 using Valetax.Infrastructure.Services;
+using Valetax.WebAPI.Middlewares;
 
 #region BUILDER
 
@@ -42,6 +43,7 @@ builder.Services.AddScoped<IUSerRememberMe, UserRememberMe>();
 builder.Services.AddScoped<ITreeService, TreeService>();
 builder.Services.AddScoped<ITreeNodeService, TreeNodeService>();
 builder.Services.AddScoped<IJournalService, JournalService>();
+builder.Services.AddTransient<IErrorHandleService, ErrorHandleService>();
 
 #endregion
 
@@ -49,7 +51,7 @@ builder.Services.AddScoped<IJournalService, JournalService>();
 
 var app = builder.Build();
 
-app.UseExceptionHandler("/error");
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

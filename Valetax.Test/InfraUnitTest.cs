@@ -1,4 +1,5 @@
 using Valetax.Infrastructure;
+using Valetax.Infrastructure.Filters;
 using Valetax.Infrastructure.Services;
 
 namespace Valetax.Test;
@@ -64,4 +65,32 @@ public class InfraUnitTest
 
         await service.RenameNode("Root1", 18, "N-XYX");
     }
+
+    [Fact]
+    public async void JournalSingleTest()
+    {
+        var service = new JournalService();
+
+        var ji = await service.GetSingle(1);
+        
+        Assert.NotNull(ji);
+    }
+    
+    [Fact]
+    public async void JournalRangeTest()
+    {
+        var service = new JournalService();
+
+        var ji = await service.GetRange(
+            0,
+            100, 
+            new JournalFilter
+            {
+                From = new DateTime(2024, 8, 5).ToUniversalTime(),
+                To = new DateTime(2024, 8, 5).ToUniversalTime(),
+                Search = "Er"
+            });
+        
+        Assert.NotNull(ji);
+    } 
 }
