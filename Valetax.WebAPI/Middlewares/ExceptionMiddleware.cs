@@ -2,6 +2,7 @@
 using System.Net.Mime;
 using System.Text;
 using System.Text.Json;
+using Microsoft.AspNetCore.WebUtilities;
 using Valetax.Infrastructure.Contracts;
 using Velatex.Domain.Exceptions;
 
@@ -56,11 +57,17 @@ public class ExceptionMiddleware
         var reqPath = context.Request.Path.ToString();
         var reqQuery = context.Request.QueryString.ToString();
 
-        var problemDetailsResponse = await _errorHandleService.SaveErrorToJournal(reqPath, reqQuery, reqBody, ex);
+        var jsonSerializerOptions = new JsonSerializerOptions
+            { PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower };
 
-        var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower };
+        var parsedQuery = QueryHelpers.ParseQuery(reqQuery);
+        // if query parameters has multiple values - remove this line and serialise parsedQuery
+        var queryAsDictionary = parsedQuery.ToDictionary(kvp => kvp.Key.ToString(), kvp => kvp.Value.ToString());
+        var queryAsJson = JsonSerializer.Serialize(queryAsDictionary, jsonSerializerOptions);
 
-        var json = JsonSerializer.Serialize(problemDetailsResponse, options);
+        var problemDetailsResponse = await _errorHandleService.SaveErrorToJournal(reqPath, queryAsJson, reqBody, ex);
+
+        var json = JsonSerializer.Serialize(problemDetailsResponse, jsonSerializerOptions);
         await context.Response.WriteAsync(json);
     }
 }
